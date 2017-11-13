@@ -1,11 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "parsetools.h"
 #include <string.h>
 #include <sys/wait.h>
+#include "parsetools.h"
+#include "boardvalidate.h"
 
-
-void arrcpy(char dest[][MAX_LINE_CHARS], char src[][MAX_LINE_CHARS], int length);
 
 int main(int argc, char *argv[]) {
 	char* filename;
@@ -17,6 +16,12 @@ int main(int argc, char *argv[]) {
 	}
 	
 	int** sudokuBoard = ParseFile(filename);
-
+	bool result = ValidateBoard(sudokuBoard);
+	if (!result){
+		printf( " The input is not a valid Sudoku");
+	}
+	else{
+		printf(" You did it kiddo, you valid Sudoku");
+	}
     return 0;
 }

@@ -12,9 +12,9 @@ struct readThreadParams {
     int num;
     chan_t* validChan
     ;
-    cstring error;
+    char* error;
 };
-void ValidateBoard(int** sudokuBoard);
+bool ValidateBoard(int** sudokuBoard);
 
 void* validateRow(void* params);
 
