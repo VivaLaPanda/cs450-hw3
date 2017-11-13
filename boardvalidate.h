@@ -5,6 +5,11 @@
 #ifndef CS450_HW3_BOARDVALIDATE_H
 #define CS450_HW3_BOARDVALIDATE_H
 
+#include <stdio.h>
+#include <pthread.h>
+#include <stdbool.h>
+#include <string.h>
+#include "chan.h"
 // Struct for thread params
 // https://stackoverflow.com/a/16230944/4730779
 struct readThreadParams {

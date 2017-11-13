@@ -1,7 +1,3 @@
-#include <stdio.h>
-#include <pthread.h>
-#include <string.h>
-#include "chan.h"
 #include "boardvalidate.h"
 
 

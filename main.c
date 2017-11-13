@@ -12,7 +12,7 @@ int main(int argc, char *argv[]) {
         printf( "usage: %s filename\n", argv[0] );
 		return 1;
 	} else {
-		filename = argc[1];
+		filename = argv[1];
 	}
 	
 	int** sudokuBoard = ParseFile(filename);
