@@ -65,12 +65,12 @@ int** ParseFile(char* filename) {
 	fclose(input_file);
 	
 	// Break string into rows by newline
-	char** rowsAsStrings = str_split(file_contents, '\n')
+	char** rowsAsStrings = str_split(file_contents, '\n');
 	
 	// Break rows into chars by space
 	char** rowsOfElements[9]; // array or arrays of character arrays
 	for(int i=0; i < 9; i++) {
-		rowsOfElements[i] = str_split(rowsAsStrings[i], ' ')
+		rowsOfElements[i] = str_split(rowsAsStrings[i], ' ');
 	}
 	
 	// rowsOfElements is now a 2D grid of char pointers, but we want those char pointers to be ints
@@ -80,7 +80,7 @@ int** ParseFile(char* filename) {
 		for(int j=0; j < 9; j++) {
 			// The 0 is to get the first character (which should be the only one except null term)
 			// Minus 0 converts to int - https://stackoverflow.com/a/628778/4951118
-			sudokuBoard[i][j] = rowsOfElements[i][j][0] - '0' 
+			sudokuBoard[i][j] = rowsOfElements[i][j][0] - '0';
 		}
 	}
 	
