@@ -8,9 +8,9 @@ bool ValidateBoard(int sudokuBoard[9][9]) {
     //TODO threads are probabbly not declared right
 	printf("Summoning workers\n");
     for (int i=0; i<9; i++) {
-        char *strR = malloc(100);
-        char *strC = malloc(100);
-        char *strB = malloc(100);
+        char* strR = malloc(100);
+        char* strC = malloc(100);
+        char* strB = malloc(100);
         sprintf(strR,"Row %d",i);
 		
 		struct readThreadParams* readParams = malloc(sizeof(struct readThreadParams));
@@ -86,10 +86,12 @@ bool ValidateBoard(int sudokuBoard[9][9]) {
     void* error_string;
     while ( chan_recv(valid, &error_string) == 0)
     {
-        printf("%s doesn't have the requred values.\n", (char*)error_string);
+        if (error_string != NULL) {
+            printf("%s doesn't have the requred values.\n", error_string);
+            work = false;
+        }
         i++;
         if (i >= 27){
-            work = false;
             break;
         }
     }
@@ -105,7 +107,7 @@ void* validateRow(void* params) {
 
     for (int i = 0; i < 9; i++){
         //check board[i][num]
-        test[params1->sudokuBoard[i][params1->num]] = true;
+        test[params1->sudokuBoard[i][params1->num]-1] = true;
     }
 
     //check for valid
@@ -129,7 +131,7 @@ void* validateCol(void* params) {
 
     for (int j = 0; j < 9; j++){
         //check board[n][i]
-        test[params1->sudokuBoard[params1->num][j]] = true;
+        test[params1->sudokuBoard[params1->num][j]-1] = true;
     }
 
     //check for valid
@@ -150,17 +152,18 @@ void* validateBox(void* params) {
     struct readThreadParams *params1 = params;
     //create a bool array for comparison
     bool test[9] = {false};
-    int base_row = params1->num / 3;
-    int base_col = params1->num % 3;
+    int base_row = 3*(params1->num / 3);
+    int base_col = 3*(params1->num % 3);
     for ( int i = 0; i < 3; i++){
         for (int j = 0; j < 3; j++){
-            test[params1->sudokuBoard[base_col+i][base_row+j]] = true;
+            printf("%d %d \n",base_col,base_row);
+            test[(params1->sudokuBoard[base_col+i][base_row+j])-1] = true;
         }
     }
 
     //check for valid
     bool isValid = testArray(test);
-	printf("Checked box %d,%d\n", base_row, base_col);
+	//printf("Checked box %d,%d\n", base_row, base_col);
     //if not valid tell the main the error, otherwise tell it null.
     if (!isValid) {
         chan_send(params1->validChan, params1->error);
