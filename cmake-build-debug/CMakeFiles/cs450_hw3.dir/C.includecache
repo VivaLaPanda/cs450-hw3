@@ -1,0 +1,104 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+M:/Documents/Documents/SchoolWork/College/CS 450/cs450-hw3/boardvalidate.c
+boardvalidate.h
+M:/Documents/Documents/SchoolWork/College/CS 450/cs450-hw3/boardvalidate.h
+
+M:/Documents/Documents/SchoolWork/College/CS 450/cs450-hw3/boardvalidate.h
+stdio.h
+-
+pthread.h
+-
+stdbool.h
+-
+string.h
+-
+chan.h
+M:/Documents/Documents/SchoolWork/College/CS 450/cs450-hw3/chan.h
+
+M:/Documents/Documents/SchoolWork/College/CS 450/cs450-hw3/chan.c
+errno.h
+-
+pthread.h
+-
+stdlib.h
+-
+stdio.h
+-
+string.h
+-
+unistd.h
+-
+time.h
+-
+sys/time.h
+-
+mach/clock.h
+-
+mach/mach.h
+-
+chan.h
+M:/Documents/Documents/SchoolWork/College/CS 450/cs450-hw3/chan.h
+queue.h
+M:/Documents/Documents/SchoolWork/College/CS 450/cs450-hw3/queue.h
+windows.h
+-
+
+M:/Documents/Documents/SchoolWork/College/CS 450/cs450-hw3/chan.h
+pthread.h
+-
+stdint.h
+-
+queue.h
+M:/Documents/Documents/SchoolWork/College/CS 450/cs450-hw3/queue.h
+
+M:/Documents/Documents/SchoolWork/College/CS 450/cs450-hw3/main.c
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+sys/wait.h
+-
+parsetools.h
+M:/Documents/Documents/SchoolWork/College/CS 450/cs450-hw3/parsetools.h
+boardvalidate.h
+M:/Documents/Documents/SchoolWork/College/CS 450/cs450-hw3/boardvalidate.h
+
+M:/Documents/Documents/SchoolWork/College/CS 450/cs450-hw3/parsetools.c
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+assert.h
+-
+
+M:/Documents/Documents/SchoolWork/College/CS 450/cs450-hw3/parsetools.h
+
+M:/Documents/Documents/SchoolWork/College/CS 450/cs450-hw3/queue.c
+errno.h
+-
+limits.h
+-
+pthread.h
+-
+stdio.h
+-
+stdlib.h
+-
+queue.h
+M:/Documents/Documents/SchoolWork/College/CS 450/cs450-hw3/queue.h
+winsock.h
+-
+
+M:/Documents/Documents/SchoolWork/College/CS 450/cs450-hw3/queue.h
+

@@ -15,7 +15,8 @@ int main(int argc, char *argv[]) {
 		filename = argv[1];
 	}
 	
-	int** sudokuBoard = ParseFile(filename);
+	int sudokuBoard[9][9];
+	ParseFile(filename, sudokuBoard); // Parsefile stores result in sudokuboard
 	bool result = ValidateBoard(sudokuBoard);
 	if (!result){
 		printf( " The input is not a valid Sudoku");

@@ -1,12 +1,10 @@
 #include "boardvalidate.h"
 
-
-
 bool ValidateBoard(int** sudokuBoard) {
 //This is the mother function board
     chan_t* valid;
     valid = chan_init(27);
-    pthread th[27];
+    pthread_t th[27];
     //TODO threads are probabbly not declared right
     struct readThreadParams readParams;
     readParams.sudokuBoard = sudokuBoard;
@@ -14,9 +12,9 @@ bool ValidateBoard(int** sudokuBoard) {
     for (int i = 0; i++; i <9) {
         readParams.num = i;
 
-        char* strR[100];
-        char* strC[100];
-        char* strB[100];
+        char strR[100];
+        char strC[100];
+        char strB[100];
         sprintf(strR,"Row ",i);
         readParams.error = strR;
         //validateRow
@@ -26,37 +24,47 @@ bool ValidateBoard(int** sudokuBoard) {
         readParams.error = strC;
         //validateCol
         pthread_create(&th[i+9],NULL,validateRow,&readParams);
-
+		char *tmp;
         switch(i+1) {
             case 1:
-                strB = "The left top";
+				tmp = "The left top";
+                strcpy(strB, tmp);
                 break;
             case 2:
-                strB = "The middle top";
+                tmp = "The middle top";
+                strcpy(strB, tmp);
                 break;
             case 3:
-                strB = "The right top";
+                tmp = "The right top";
+                strcpy(strB, tmp);
                 break;
             case 4:
-                strB = "The left middle";
+                tmp = "The left middle";
+                strcpy(strB, tmp);
                 break;
             case 5:
-                strB = "The middle middle";
+                tmp = "The middle middle";
+                strcpy(strB, tmp);
                 break;
             case 6:
-                strB = "The right middle";
+                tmp = "The right middle";
+                strcpy(strB, tmp);
                 break;
             case 7:
-                strB = "The left bottom";
+                tmp = "The left bottom";
+                strcpy(strB, tmp);
                 break;
             case 8:
-                strB = "The middle bottom";
+                tmp = "The middle bottom";
+                strcpy(strB, tmp);
                 break;
             case 9:
-                strB = "The right bottom";
+                tmp = "The right bottom";
+                strcpy(strB, tmp);
                 break;
             default:
-                strB = "invalid bounds";
+                tmp = "invalid bounds";
+                strcpy(strB, tmp);
         }
 
         readParams.error = strB;
@@ -66,10 +74,10 @@ bool ValidateBoard(int** sudokuBoard) {
     }
     int i = 0;
     bool work = true;
-    void error_string;
+    void* error_string;
     while ( chan_recv(readParams.validChan, &error_string) == 0)
     {
-        printf("%s doesn't have the requred values.\n", (char*)error_string);
+        printf("%s doesn't have the requred values.\n", error_string);
         i++;
         if (i >= 27){
             work = false;
@@ -135,7 +143,7 @@ void* validateBox(void* params) {
     int base_col = params1->num % 3;
     for ( int i = 0; i < 3; i++){
         for (int j = 0; j < 3; j++){
-            test[base_col+i][base_row+j] = true;
+            test[params1->sudokuBoard[base_col+i][base_row+j]] = true;
         }
     }
 
@@ -154,7 +162,7 @@ bool testArray(bool* test) {
 
     //look for any cases where a number isn't present
     for (int k = 0; k < 9; k++) {
-        if (!test[i])
+        if (!test[k])
             return false;
     }
     return true;

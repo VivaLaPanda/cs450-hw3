@@ -52,7 +52,7 @@ char** str_split(char* a_str, const char a_delim) {
     return result;
 }
 	
-int** ParseFile(char* filename) {
+void ParseFile(char* filename, int sudokuBoard[9][9]) {
 	// Read file into string - https://stackoverflow.com/a/7856790/4951118
 	char *file_contents;
 	long input_file_size;
@@ -75,7 +75,6 @@ int** ParseFile(char* filename) {
 	
 	// rowsOfElements is now a 2D grid of char pointers, but we want those char pointers to be ints
 	// Convert chars to ints
-	int sudokuBoard[9][9];
 	for(int i=0; i < 9; i++) {
 		for(int j=0; j < 9; j++) {
 			// The 0 is to get the first character (which should be the only one except null term)
@@ -83,6 +82,4 @@ int** ParseFile(char* filename) {
 			sudokuBoard[i][j] = rowsOfElements[i][j][0] - '0';
 		}
 	}
-	
-	return sudokuBoard;
 }

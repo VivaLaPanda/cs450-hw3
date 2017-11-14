@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="cs450_hw3"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="M:/Documents/Documents/SchoolWork/College/CS 450/cs450-hw3/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="T:/MinGW/bin/mingw32-make.exe -f &quot;M:/Documents/Documents/SchoolWork/College/CS 450/cs450-hw3/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="T:/MinGW/bin/mingw32-make.exe -f &quot;M:/Documents/Documents/SchoolWork/College/CS 450/cs450-hw3/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="T:/MinGW/bin/mingw32-make.exe -f &quot;M:/Documents/Documents/SchoolWork/College/CS 450/cs450-hw3/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="T:/MinGW/bin/mingw32-make.exe -f &quot;M:/Documents/Documents/SchoolWork/College/CS 450/cs450-hw3/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="cs450_hw3">
+				<Option output="M:/Documents/Documents/SchoolWork/College/CS 450/cs450-hw3/cmake-build-debug/cs450_hw3.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="M:/Documents/Documents/SchoolWork/College/CS 450/cs450-hw3/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="t:\mingw\bin\../lib/gcc/mingw32/4.8.1/include/c++"/>
+					<Add directory="t:\mingw\bin\../lib/gcc/mingw32/4.8.1/include/c++/mingw32"/>
+					<Add directory="t:\mingw\bin\../lib/gcc/mingw32/4.8.1/include/c++/backward"/>
+					<Add directory="t:\mingw\bin\../lib/gcc/mingw32/4.8.1/include"/>
+					<Add directory="t:\mingw\bin\../lib/gcc/mingw32/4.8.1/../../../../include"/>
+					<Add directory="t:\mingw\bin\../lib/gcc/mingw32/4.8.1/include-fixed"/>
+					<Add directory="t:\mingw\bin\../lib/gcc/mingw32/4.8.1/../../../../mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="T:/MinGW/bin/mingw32-make.exe -f &quot;M:/Documents/Documents/SchoolWork/College/CS 450/cs450-hw3/cmake-build-debug/Makefile&quot;  VERBOSE=1 cs450_hw3"/>
+					<CompileFile command="T:/MinGW/bin/mingw32-make.exe -f &quot;M:/Documents/Documents/SchoolWork/College/CS 450/cs450-hw3/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="T:/MinGW/bin/mingw32-make.exe -f &quot;M:/Documents/Documents/SchoolWork/College/CS 450/cs450-hw3/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="T:/MinGW/bin/mingw32-make.exe -f &quot;M:/Documents/Documents/SchoolWork/College/CS 450/cs450-hw3/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="cs450_hw3/fast">
+				<Option output="M:/Documents/Documents/SchoolWork/College/CS 450/cs450-hw3/cmake-build-debug/cs450_hw3.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="M:/Documents/Documents/SchoolWork/College/CS 450/cs450-hw3/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="t:\mingw\bin\../lib/gcc/mingw32/4.8.1/include/c++"/>
+					<Add directory="t:\mingw\bin\../lib/gcc/mingw32/4.8.1/include/c++/mingw32"/>
+					<Add directory="t:\mingw\bin\../lib/gcc/mingw32/4.8.1/include/c++/backward"/>
+					<Add directory="t:\mingw\bin\../lib/gcc/mingw32/4.8.1/include"/>
+					<Add directory="t:\mingw\bin\../lib/gcc/mingw32/4.8.1/../../../../include"/>
+					<Add directory="t:\mingw\bin\../lib/gcc/mingw32/4.8.1/include-fixed"/>
+					<Add directory="t:\mingw\bin\../lib/gcc/mingw32/4.8.1/../../../../mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="T:/MinGW/bin/mingw32-make.exe -f &quot;M:/Documents/Documents/SchoolWork/College/CS 450/cs450-hw3/cmake-build-debug/Makefile&quot;  VERBOSE=1 cs450_hw3/fast"/>
+					<CompileFile command="T:/MinGW/bin/mingw32-make.exe -f &quot;M:/Documents/Documents/SchoolWork/College/CS 450/cs450-hw3/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="T:/MinGW/bin/mingw32-make.exe -f &quot;M:/Documents/Documents/SchoolWork/College/CS 450/cs450-hw3/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="T:/MinGW/bin/mingw32-make.exe -f &quot;M:/Documents/Documents/SchoolWork/College/CS 450/cs450-hw3/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="M:/Documents/Documents/SchoolWork/College/CS 450/cs450-hw3/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="T:/MinGW/bin/mingw32-make.exe -f &quot;M:/Documents/Documents/SchoolWork/College/CS 450/cs450-hw3/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="T:/MinGW/bin/mingw32-make.exe -f &quot;M:/Documents/Documents/SchoolWork/College/CS 450/cs450-hw3/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="T:/MinGW/bin/mingw32-make.exe -f &quot;M:/Documents/Documents/SchoolWork/College/CS 450/cs450-hw3/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="T:/MinGW/bin/mingw32-make.exe -f &quot;M:/Documents/Documents/SchoolWork/College/CS 450/cs450-hw3/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="M:/Documents/Documents/SchoolWork/College/CS 450/cs450-hw3/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="T:/MinGW/bin/mingw32-make.exe -f &quot;M:/Documents/Documents/SchoolWork/College/CS 450/cs450-hw3/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="T:/MinGW/bin/mingw32-make.exe -f &quot;M:/Documents/Documents/SchoolWork/College/CS 450/cs450-hw3/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="T:/MinGW/bin/mingw32-make.exe -f &quot;M:/Documents/Documents/SchoolWork/College/CS 450/cs450-hw3/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="T:/MinGW/bin/mingw32-make.exe -f &quot;M:/Documents/Documents/SchoolWork/College/CS 450/cs450-hw3/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="M:/Documents/Documents/SchoolWork/College/CS 450/cs450-hw3/boardvalidate.c">
+			<Option target="cs450_hw3"/>
+		</Unit>
+		<Unit filename="M:/Documents/Documents/SchoolWork/College/CS 450/cs450-hw3/boardvalidate.h">
+			<Option target="cs450_hw3"/>
+		</Unit>
+		<Unit filename="M:/Documents/Documents/SchoolWork/College/CS 450/cs450-hw3/chan.c">
+			<Option target="cs450_hw3"/>
+		</Unit>
+		<Unit filename="M:/Documents/Documents/SchoolWork/College/CS 450/cs450-hw3/chan.h">
+			<Option target="cs450_hw3"/>
+		</Unit>
+		<Unit filename="M:/Documents/Documents/SchoolWork/College/CS 450/cs450-hw3/main.c">
+			<Option target="cs450_hw3"/>
+		</Unit>
+		<Unit filename="M:/Documents/Documents/SchoolWork/College/CS 450/cs450-hw3/makefile">
+			<Option target="cs450_hw3"/>
+		</Unit>
+		<Unit filename="M:/Documents/Documents/SchoolWork/College/CS 450/cs450-hw3/parsetools.c">
+			<Option target="cs450_hw3"/>
+		</Unit>
+		<Unit filename="M:/Documents/Documents/SchoolWork/College/CS 450/cs450-hw3/parsetools.h">
+			<Option target="cs450_hw3"/>
+		</Unit>
+		<Unit filename="M:/Documents/Documents/SchoolWork/College/CS 450/cs450-hw3/queue.c">
+			<Option target="cs450_hw3"/>
+		</Unit>
+		<Unit filename="M:/Documents/Documents/SchoolWork/College/CS 450/cs450-hw3/queue.h">
+			<Option target="cs450_hw3"/>
+		</Unit>
+		<Unit filename="M:/Documents/Documents/SchoolWork/College/CS 450/cs450-hw3/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
