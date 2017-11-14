@@ -95,7 +95,6 @@ bool ValidateBoard(int sudokuBoard[9][9]) {
             break;
         }
     }
-    //TODO join threads, check for errors
     return work;
 
 }
@@ -113,7 +112,7 @@ void* validateRow(void* params) {
     //check for valid
     bool isValid = testArray(test);
     //if not valid tell the main the error, otherwise tell it null.
-	printf("Checked row %d\n", params1->num);
+	//printf("Checked row %d\n", params1->num);
     if (!isValid) {
         chan_send(params1->validChan, params1->error);
     }
@@ -137,7 +136,7 @@ void* validateCol(void* params) {
     //check for valid
     bool isValid = testArray(test);
     //if not valid tell the main the error, otherwise tell it null.
-	printf("Checked col %d\n", params1->num);
+	//printf("Checked col %d\n", params1->num);
     if (!isValid) {
         chan_send(params1->validChan, params1->error);
     }
@@ -156,7 +155,7 @@ void* validateBox(void* params) {
     int base_col = 3*(params1->num % 3);
     for ( int i = 0; i < 3; i++){
         for (int j = 0; j < 3; j++){
-            printf("%d %d \n",base_col,base_row);
+            //printf("%d %d \n",base_col,base_row);
             test[(params1->sudokuBoard[base_col+i][base_row+j])-1] = true;
         }
     }

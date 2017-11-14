@@ -1,7 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <sys/wait.h>
 #include "parsetools.h"
 #include "boardvalidate.h"
 
@@ -19,10 +16,10 @@ int main(int argc, char *argv[]) {
 	ParseFile(filename, sudokuBoard); // Parsefile stores result in sudokuboard
 	bool result = ValidateBoard(sudokuBoard);
 	if (!result){
-		printf( " The input is not a valid Sudoku\n");
+		printf( "The input is not a valid Sudoku\n");
 	}
 	else{
-		printf(" You did it kiddo, you valid Sudoku\n");
+		printf("You did it kiddo, you valid Sudoku\n");
 	}
-    return 0;
+	return 0;
 }
