@@ -8,9 +8,9 @@ bool ValidateBoard(int sudokuBoard[9][9]) {
     //TODO threads are probabbly not declared right
 	printf("Summoning workers\n");
     for (int i=0; i<9; i++) {
-        char strR[100];
-        char strC[100];
-        char strB[100];
+        char *strR = malloc(100);
+        char *strC = malloc(100);
+        char *strB = malloc(100);
         sprintf(strR,"Row %d",i);
 		
 		struct readThreadParams* readParams = malloc(sizeof(struct readThreadParams));
@@ -86,7 +86,7 @@ bool ValidateBoard(int sudokuBoard[9][9]) {
     void* error_string;
     while ( chan_recv(valid, &error_string) == 0)
     {
-        printf("%s doesn't have the requred values.\n", error_string);
+        printf("%s doesn't have the requred values.\n", (char*)error_string);
         i++;
         if (i >= 27){
             work = false;
