@@ -8,18 +8,19 @@
 #include <stdio.h>
 #include <pthread.h>
 #include <stdbool.h>
+#include <stdlib.h>
 #include <string.h>
 #include "chan.h"
 // Struct for thread params
 // https://stackoverflow.com/a/16230944/4730779
 struct readThreadParams {
-    int** sudokuBoard;
+    int (*sudokuBoard)[9];
     int num;
     chan_t* validChan
     ;
     char* error;
 };
-bool ValidateBoard(int** sudokuBoard);
+bool ValidateBoard(int sudokuBoard[9][9]);
 
 void* validateRow(void* params);
 

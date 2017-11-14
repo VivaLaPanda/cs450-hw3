@@ -1,29 +1,34 @@
 #include "boardvalidate.h"
 
-bool ValidateBoard(int** sudokuBoard) {
+bool ValidateBoard(int sudokuBoard[9][9]) {
 //This is the mother function board
     chan_t* valid;
     valid = chan_init(27);
     pthread_t th[27];
     //TODO threads are probabbly not declared right
-    struct readThreadParams readParams;
-    readParams.sudokuBoard = sudokuBoard;
-    readParams.validChan = valid;
-    for (int i = 0; i++; i <9) {
-        readParams.num = i;
-
+	printf("Summoning workers\n");
+    for (int i=0; i<9; i++) {
         char strR[100];
         char strC[100];
         char strB[100];
-        sprintf(strR,"Row ",i);
-        readParams.error = strR;
+        sprintf(strR,"Row %d",i);
+		
+		struct readThreadParams* readParams = malloc(sizeof(struct readThreadParams));
+		(*readParams).sudokuBoard = sudokuBoard;
+		(*readParams).validChan = valid;
+        (*readParams).num = i;
+        (*readParams).error = strR;
         //validateRow
-        pthread_create(&th[i],NULL,validateRow,&readParams);
+        pthread_create(&th[i],NULL,validateRow,readParams);
 
-        sprintf(strR,"Col ",i);
-        readParams.error = strC;
+        sprintf(strC,"Col %d",i);
+		readParams = malloc(sizeof(struct readThreadParams));
+		(*readParams).sudokuBoard = sudokuBoard;
+		(*readParams).validChan = valid;
+        (*readParams).num = i;
+        (*readParams).error = strC;
         //validateCol
-        pthread_create(&th[i+9],NULL,validateRow,&readParams);
+        pthread_create(&th[i+9],NULL,validateCol,readParams);
 		char *tmp;
         switch(i+1) {
             case 1:
@@ -67,15 +72,19 @@ bool ValidateBoard(int** sudokuBoard) {
                 strcpy(strB, tmp);
         }
 
-        readParams.error = strB;
+		readParams = malloc(sizeof(struct readThreadParams));
+		(*readParams).sudokuBoard = sudokuBoard;
+		(*readParams).validChan = valid;
+        (*readParams).num = i;
+        (*readParams).error = strB;
         //validateBox
-        pthread_create(&th[i+18],NULL,validateRow,&readParams);
+        pthread_create(&th[i+18],NULL,validateBox,readParams);
 
     }
     int i = 0;
     bool work = true;
     void* error_string;
-    while ( chan_recv(readParams.validChan, &error_string) == 0)
+    while ( chan_recv(valid, &error_string) == 0)
     {
         printf("%s doesn't have the requred values.\n", error_string);
         i++;
@@ -102,6 +111,7 @@ void* validateRow(void* params) {
     //check for valid
     bool isValid = testArray(test);
     //if not valid tell the main the error, otherwise tell it null.
+	printf("Checked row %d\n", params1->num);
     if (!isValid) {
         chan_send(params1->validChan, params1->error);
     }
@@ -125,6 +135,7 @@ void* validateCol(void* params) {
     //check for valid
     bool isValid = testArray(test);
     //if not valid tell the main the error, otherwise tell it null.
+	printf("Checked col %d\n", params1->num);
     if (!isValid) {
         chan_send(params1->validChan, params1->error);
     }
@@ -149,6 +160,7 @@ void* validateBox(void* params) {
 
     //check for valid
     bool isValid = testArray(test);
+	printf("Checked box %d,%d\n", base_row, base_col);
     //if not valid tell the main the error, otherwise tell it null.
     if (!isValid) {
         chan_send(params1->validChan, params1->error);

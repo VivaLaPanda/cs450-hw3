@@ -18,11 +18,11 @@ parsetools.o: parsetools.c
 boardvalidate.o: boardvalidate.c
 	gcc -std=c11 -g -c -pthread -o $@ $<
 	
-# chan.o: chan.c
-	# gcc -std=c11 -g -c -o $@ $<
+chan.o: chan.c
+	gcc -std=c11 -g -c -o $@ $<
 	
-# queue.o: chan.c
-	# gcc -std=c11 -g -c -o $@ $<
+queue.o: queue.c
+	gcc -std=c11 -g -c -o $@ $<
 
 clean:
 	rm -f *.x *.o *~
