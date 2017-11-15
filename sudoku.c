@@ -135,7 +135,7 @@ int chan_recv_buf(chan_t*, void*, size_t);
 #define PARSE_H
 
 char** str_split(char* a_str, char a_delim);
-void ParseFile(char* filename, int sudokuBoard[9][9]);
+void ParseFile(int sudokuBoard[9][9]);
 
 #endif//
 // Created by Jeffrey  Booher-Kaeding on 11/12/17.
@@ -176,16 +176,8 @@ bool testArray(bool const * test);
 
 
 int main(int argc, char *argv[]) {
-	char* filename;
-    if (argc != 2) {/* We print argv[0] assuming it is the program name */
-        printf( "usage: %s filename\n", argv[0] );
-		return 1;
-	} else {
-		filename = argv[1];
-	}
-	
 	int sudokuBoard[9][9];
-	ParseFile(filename, sudokuBoard); // Parsefile stores result in sudokuboard
+	ParseFile(sudokuBoard); // Parsefile stores result in sudokuboard
 	bool result = ValidateBoard(sudokuBoard);
 	if (!result){
 		printf( "The input is not a valid Sudoku\n");
@@ -979,18 +971,36 @@ char** str_split(char* a_str, char a_delim) {
 
     return result;
 }
+
+#define BUF_SIZE 512
+#define BUF_MIN 128
 	
-void ParseFile(char* filename, int sudokuBoard[9][9]) {
+void ParseFile(int sudokuBoard[9][9]) {
 	// Read file into string - https://stackoverflow.com/a/7856790/4951118
-	char *file_contents;
-	long input_file_size;
-	FILE *input_file = fopen(filename, "rb");
-	fseek(input_file, 0, SEEK_END);
-	input_file_size = ftell(input_file);
-	rewind(input_file);
-	file_contents = malloc(input_file_size * (sizeof(char)));
-	fread(file_contents, sizeof(char), input_file_size, input_file);
-	fclose(input_file);
+	char *file_contents, *p;
+    int len, remain, n, size;
+
+    size = BUF_SIZE;
+    file_contents = malloc(size);
+    len = 0;
+    remain = size;
+    while (!feof(stdin)) {
+		if (remain <= BUF_MIN) {
+			remain += size;
+			size *= 2;
+			p = realloc(file_contents, size);
+			if (p == NULL) {
+				free(file_contents);
+				return;
+			}
+			file_contents = p;
+		}
+
+		fgets(file_contents + len, remain, stdin);
+		n = strlen(file_contents + len);
+		len += n;
+		remain -= n;
+	}
 	
 	// Break string into rows by newline
 	char** rowsAsStrings = str_split(file_contents, '\n');
@@ -1010,6 +1020,8 @@ void ParseFile(char* filename, int sudokuBoard[9][9]) {
 			sudokuBoard[i][j] = rowsOfElements[i][j][0] - '0';
 		}
 	}
+	
+	free(file_contents);
 }
 #include "boardvalidate.h"
 
@@ -1108,8 +1120,13 @@ bool ValidateBoard(int sudokuBoard[9][9]) {
             break;
         }
     }
+	
     return work;
+}
 
+void* freedom(struct readThreadParams *params) {
+	free(params->error);
+	free(params);
 }
 
 void* validateRow(void* params) {
@@ -1132,6 +1149,7 @@ void* validateRow(void* params) {
         chan_send(params1->validChan, NULL);
     }
     //return a null pointer to make CLion happy.
+	freedom(params);
     return NULL;
 }
 
@@ -1157,6 +1175,7 @@ void* validateCol(void* params) {
         chan_send(params1->validChan, NULL);
     }
     //return a null pointer to make CLion happy.
+	freedom(params);
     return NULL;
 }
 
@@ -1187,6 +1206,7 @@ void* validateBox(void* params) {
         chan_send(params1->validChan, NULL);
     }
     //return a null pointer to make CLion happy.
+	freedom(params);
     return NULL;
 }
 
