@@ -1040,6 +1040,7 @@ bool ValidateBoard(int sudokuBoard[9][9]) {
         char* strB = malloc(100);
         sprintf(strR,"Row %d",i);
 		
+		// Making sure every thread has a unique struct
 		struct readThreadParams* readParams = malloc(sizeof(struct readThreadParams));
 		(*readParams).sudokuBoard = sudokuBoard;
 		(*readParams).validChan = valid;
@@ -1055,6 +1056,7 @@ bool ValidateBoard(int sudokuBoard[9][9]) {
         (*readParams).num = i;
         (*readParams).error = strC;
         //validateCol
+		// Generating the strings the channels will return
         pthread_create(&th[i+9],NULL,validateCol,readParams);
 		char *tmp;
         switch(i+1) {
@@ -1115,17 +1117,18 @@ bool ValidateBoard(int sudokuBoard[9][9]) {
             printf("%s doesn't have the requred values.\n", (char*)error_string);
             work = false;
         }
+		free(error_string);
         i++;
         if (i >= 27){
             break;
         }
     }
 	
+	chan_dispose(valid);
     return work;
 }
 
 void* freedom(struct readThreadParams *params) {
-	free(params->error);
 	free(params);
 }
 
