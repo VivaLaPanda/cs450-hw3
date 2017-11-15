@@ -5,7 +5,7 @@
 
 // Splits a string by token
 // https://stackoverflow.com/a/9210560/4951118
-char** str_split(char* a_str, const char a_delim) {
+char** str_split(char* a_str, char a_delim) {
     char** result    = 0;
     size_t count     = 0;
     char* tmp        = a_str;

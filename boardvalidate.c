@@ -5,8 +5,10 @@ bool ValidateBoard(int sudokuBoard[9][9]) {
     chan_t* valid;
     valid = chan_init(27);
     pthread_t th[27];
-    //TODO threads are probabbly not declared right
-	printf("Summoning workers\n");
+	//printf("Summoning workers\n");
+
+    //
+    //
     for (int i=0; i<9; i++) {
         char* strR = malloc(100);
         char* strC = malloc(100);
@@ -71,15 +73,13 @@ bool ValidateBoard(int sudokuBoard[9][9]) {
                 tmp = "invalid bounds";
                 strcpy(strB, tmp);
         }
-
-		readParams = malloc(sizeof(struct readThreadParams));
+        readParams = malloc(sizeof(struct readThreadParams));
 		(*readParams).sudokuBoard = sudokuBoard;
 		(*readParams).validChan = valid;
         (*readParams).num = i;
         (*readParams).error = strB;
         //validateBox
         pthread_create(&th[i+18],NULL,validateBox,readParams);
-
     }
     int i = 0;
     bool work = true;
@@ -87,7 +87,7 @@ bool ValidateBoard(int sudokuBoard[9][9]) {
     while ( chan_recv(valid, &error_string) == 0)
     {
         if (error_string != NULL) {
-            printf("%s doesn't have the requred values.\n", error_string);
+            printf("%s doesn't have the requred values.\n", (char*)error_string);
             work = false;
         }
         i++;
@@ -112,13 +112,14 @@ void* validateRow(void* params) {
     //check for valid
     bool isValid = testArray(test);
     //if not valid tell the main the error, otherwise tell it null.
-	//printf("Checked row %d\n", params1->num);
     if (!isValid) {
         chan_send(params1->validChan, params1->error);
     }
     else {
         chan_send(params1->validChan, NULL);
     }
+    //return a null pointer to make CLion happy.
+    return NULL;
 }
 
 
@@ -136,14 +137,14 @@ void* validateCol(void* params) {
     //check for valid
     bool isValid = testArray(test);
     //if not valid tell the main the error, otherwise tell it null.
-	//printf("Checked col %d\n", params1->num);
     if (!isValid) {
         chan_send(params1->validChan, params1->error);
     }
     else {
         chan_send(params1->validChan, NULL);
     }
-
+    //return a null pointer to make CLion happy.
+    return NULL;
 }
 
 
@@ -151,18 +152,20 @@ void* validateBox(void* params) {
     struct readThreadParams *params1 = params;
     //create a bool array for comparison
     bool test[9] = {false};
+    //we use this to index in the 9x9 grid
+    //we use (num/3)*3 for the int divisor, and for the rows
     int base_row = 3*(params1->num / 3);
+    //we use mod three for the cols
     int base_col = 3*(params1->num % 3);
+    //we then go in a 3x3 box with the base being the top left.
     for ( int i = 0; i < 3; i++){
         for (int j = 0; j < 3; j++){
-            //printf("%d %d \n",base_col,base_row);
             test[(params1->sudokuBoard[base_col+i][base_row+j])-1] = true;
         }
     }
 
     //check for valid
     bool isValid = testArray(test);
-	//printf("Checked box %d,%d\n", base_row, base_col);
     //if not valid tell the main the error, otherwise tell it null.
     if (!isValid) {
         chan_send(params1->validChan, params1->error);
@@ -170,14 +173,21 @@ void* validateBox(void* params) {
     else {
         chan_send(params1->validChan, NULL);
     }
+    //return a null pointer to make CLion happy.
+    return NULL;
 }
 
-bool testArray(bool* test) {
+bool testArray(bool const *  test) {
+    //const *
+    //https://stackoverflow.com/a/1143272/4730779
 
-    //look for any cases where a number isn't present
+    //lets take the list of bools,
+    // look for any cases where a number isn't present aka false
     for (int k = 0; k < 9; k++) {
         if (!test[k])
+            //if we are missing a number return false to print the error
             return false;
     }
+    //else we can return true
     return true;
 }

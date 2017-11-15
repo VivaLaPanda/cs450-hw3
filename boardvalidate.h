@@ -28,6 +28,6 @@ void* validateCol(void* params);
 
 void* validateBox(void* params);
 
-bool testArray(bool* test);
+bool testArray(bool const * test);
 
 #endif //CS450_HW3_BOARDVALIDATE_H
